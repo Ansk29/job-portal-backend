@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h1>Welcome Admin!</h1>
+  <p>This will be your control panel 😎</p>
+
+  <button onclick="logout()">Logout</button>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("adminToken");
+      window.location.href = "/admin-login.html";
+    }
+  </script>
+</body>
+</html>

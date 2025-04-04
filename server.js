@@ -24,6 +24,9 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Job Portal API ✅");
 });
 
+const path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
+
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
 
