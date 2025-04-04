@@ -1,4 +1,5 @@
 const express = require("express");
+const Job = require("../models/Job");
 const { createJob, getJobs, getJobById, updateJob, deleteJob } = require("../controllers/jobController");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");

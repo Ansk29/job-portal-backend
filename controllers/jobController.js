@@ -24,8 +24,22 @@ exports.createJob = async (req, res) => {
 // Get All Jobs
 exports.getJobs = async (req, res) => {
   try {
-    const jobs = await Job.find().populate("postedBy", "name email");
-    res.json(jobs);
+    const { title, location, jobType, page = 1, limit = 10 } = req.query;
+    const query = {};
+
+    if (title) query.title = { $regex: title, $options: "i" };
+    if (location) query.location = { $regex: location, $options: "i" };
+    if (jobType) query.jobType = jobType;
+
+    const pageNum = parseInt(page);
+    const limitNum = parseInt(limit);
+    const skip = (pageNum - 1) * limitNum;
+
+    const jobs = await Job.find(query).skip(skip).limit(limitNum);
+    const totalJobs = await Job.countDocuments(query);
+    const totalPages = Math.ceil(totalJobs / limitNum);
+
+    res.json({ totalJobs, page: pageNum, totalPages, jobs });
   } catch (err) {
     res.status(500).json({ message: "Server Error", error: err.message });
   }

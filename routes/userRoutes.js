@@ -1,10 +1,8 @@
 const express = require("express");
-const authMiddleware = require("../middleware/authMiddleware");
-
+const { updateProfile } = require("../controllers/userController");
+const authMiddleware = require("../middleware/authMiddleware"); // Ensure user is logged in
 const router = express.Router();
 
-router.get("/profile", authMiddleware, (req, res) => {
-  res.json({ message: "Welcome to your profile", user: req.user });
-});
+router.put("/profile", authMiddleware, updateProfile); // Protected Route
 
 module.exports = router;
