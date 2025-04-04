@@ -37,6 +37,8 @@ app.use("/api/jobs", jobRoutes);
 const applicationRoutes = require("./routes/applicationRoutes");
 app.use("/api/applications", applicationRoutes);
 
+const adminRoutes = require("./routes/adminRoutes");
+app.use("/api/admin", adminRoutes);
 
 
 // Server Start
