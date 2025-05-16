@@ -5,16 +5,16 @@ const roleMiddleware = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
-// ❌ Delete any job (Admin only)
+//  Delete any job (Admin only)
 router.delete("/jobs/:id", authMiddleware, roleMiddleware(["admin"]), deleteJob);
 
-// 👥 Get all users (Admin only)
+//  Get all users (Admin only)
 router.get("/users", authMiddleware, roleMiddleware(["admin"]), getAllUsers);
 
-// ❌ Delete any user (Admin only)
+//  Delete any user (Admin only)
 router.delete("/users/:id", authMiddleware, roleMiddleware(["admin"]), deleteUser);
 
-// 🔄 Update User Role (Admin only)
+//  Update User Role (Admin only)
 router.put("/users/:id", authMiddleware, roleMiddleware(["admin"]), updateUserRole);
 
 module.exports = router;

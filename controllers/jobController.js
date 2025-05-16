@@ -21,7 +21,7 @@ exports.createJob = async (req, res) => {
   }
 };
 
-// Get All Jobs
+// Get All Jobs  candidates , employer , employee 
 exports.getJobs = async (req, res) => {
   try {
     const { title, location, jobType, page = 1, limit = 10 } = req.query;
@@ -45,7 +45,7 @@ exports.getJobs = async (req, res) => {
   }
 };
 
-// Get a Single Job
+// Get a Single Job candifate , employer , employee
 exports.getJobById = async (req, res) => {
   try {
     const job = await Job.findById(req.params.id).populate("postedBy", "name email");

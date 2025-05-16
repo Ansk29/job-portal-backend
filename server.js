@@ -4,12 +4,17 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
 
+//////////////////////////////////////////////////////
+
 // Configurations
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
+
+//////////////////////////////////////////////////////
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -19,17 +24,20 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("✅ MongoDB Connected"))
 .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
+///////////////////////////////////////////////////////////////////////////
+
 // Default Route
 app.get("/", (req, res) => {
   res.send("Welcome to the Job Portal API ✅");
 });
+
+/////////////////////////////////////////////////////////////////////////
 
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
-
 
 const userRoutes = require("./routes/userRoutes");
 app.use("/api/user", userRoutes);
@@ -43,7 +51,10 @@ app.use("/api/applications", applicationRoutes);
 const adminRoutes = require("./routes/adminRoutes");
 app.use("/api/admin", adminRoutes);
 
+/////////////////////////////////////////////////////////////////////////
 
 // Server Start
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+/////////////////////////////////////////////////////////////////////////
